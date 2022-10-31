@@ -1,0 +1,190 @@
+body {
+  background-color: #fff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 3px solid #000;
+  padding: 5px 15px 5px 15px;
+  height: 40px;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  list-style: none;
+  margin: 10px 5px;
+}
+
+.links li {
+  cursor: pointer;
+  align-self: center;
+  transition: 0.3s ease;
+}
+
+.links li:hover {
+  font-size: 1.1rem;
+  color: mediumblue;
+}
+
+.link {
+  padding-right: 15px;
+  border-right: 3px solid black;
+}
+
+.active {
+  color: mediumblue;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+header {
+  display: block;
+  position: relative;
+}
+
+#time-update {
+  position: absolute;
+  right: 0;
+}
+
+section {
+  width: 100%;
+  height: 620px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.showbook {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.booklist {
+  width: 80%;
+  border: 3px solid black;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.addbokss {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.formadd {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.btn-white {
+  background-color: #fff;
+}
+
+.input-white {
+  background-color: #fff;
+  border: 3px solid black;
+  width: 300px;
+  padding: 5px;
+}
+
+.grey {
+  background-color: gainsboro;
+}
+
+.booksList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.booksLine {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 1.7rem;
+}
+
+.booksLine span {
+  margin-left: 5px;
+  align-self: center;
+}
+
+.btn-remove {
+  height: 80%;
+  align-self: center;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  margin-right: 10px;
+  background-color: white;
+  border: 2px solid black;
+  box-shadow: 3px 3px black;
+}
+
+.btn-remove:hover {
+  background-color: rgba(255, 255, 255, 0.559);
+}
+
+.btn-remove:active {
+  background-color: rgba(255, 255, 255, 0.559);
+  box-shadow: 1px 1px black;
+  transform: translateY(2px);
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+}
+
+.Contact-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.adress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.hidden {
+  display: none;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  border: 3px solid black;
+  padding: 2px 0 2px 15px;
+  margin: 0;
+}
+
+.footer p {
+  margin: 5px;
+}

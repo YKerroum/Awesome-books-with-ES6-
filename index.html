@@ -1,14 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/index.css">
-    <script src="assets/js/index.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Awesome books</title>
-</head>
-<body>
-    
-</body>
+
+    <link rel="stylesheet" href="assets/css/index.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header">
+          <div class="logo">
+            <span>Awesome Books</span>
+          </div>
+
+          <ul class="links">
+             <li id="list-b" class="link">List</li>
+             <li id="addnew-b" class="link">Add new</li>
+             <li id="Contact-b" >Contact</li>
+          </ul>
+      </div>
+      <time id="time-update"></time>
+    </header>
+
+    <section>
+      
+    <div id="showbookclose" class="showbook">
+      <h1>All awesome books</h1>
+      <div class="booklist">
+        <div class="AllB"></div>
+      </div>
+    </div>
+
+    <div id="addbooksclose" class="addbokss hidden">
+      <h2>Add a new books</h2>
+      <form action="#" id="form" class="formadd">
+        <input
+          class="input-white"
+          type="text"
+          name="Title"
+          id="title"
+          placeholder="title"
+        />
+
+        <input
+          class="input-white"
+          type="text"
+          name="Author"
+          id="author"
+          placeholder="author"
+        />
+
+        <input
+          type="submit"
+          name="submit"
+          id="submit"
+          value="Add"
+          class="btn-white"
+          onclick="storagebook.addbook()"
+        />
+      </form>
+    </div>
+
+    <div id="contactclose" class="contact hidden">
+      <div class="Contact-header">
+        <h2>Contact Information</h2>
+      </div>
+
+      <div class="contact-info">
+        <p>
+          Do have any questions or you just or you want to say "Hello"? You can
+          reach out to us!
+        </p>
+      </div>
+
+      <div class="adress">
+        <ul>
+          <li>Our e-mail: Hevarkas@gmail.com</li>
+
+          <li>Our phone number: +964 770 469 9094</li>
+
+          <li>Our address: Erbil, Iraq</li>
+        </ul>
+        <ul>
+          <li>Our e-mail: Camarad21@gmail.com</li>
+
+          <li>Our phone number: +212 654 737905</li>
+
+          <li>Our address: Laayoune, Morocco</li>
+        </ul>
+      </div>
+    </div>
+    </section>
+
+    <footer>
+      <div class="footer">
+        <p>Copyright -</p>
+      </div>
+    </footer>
+
+    <script src="assets/js/index.js"></script>
+  </body>
 </html>
