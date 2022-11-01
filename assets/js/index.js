@@ -1,111 +1,116 @@
-const listb = document.getElementById('list-b');
-const addnewb = document.getElementById('addnew-b');
-const contactb = document.getElementById('Contact-b');
+/* eslint-disable max-classes-per-file */
 
-const closebook = document.getElementById('showbookclose');
-const closeaddbook = document.getElementById('addbooksclose');
-const closecontact = document.getElementById('contactclose');
+import Store from '../modules/StoreClass.js';
+import Book from '../modules/bookClass.js';
+import { DateTime } from '../modules/luxon.js';
 
-const timecontainer = document.getElementById('time-update');
-const bo = document.querySelector('.AllB');
+// Variables for Single Page
+const list = document.querySelector('#list');
+const addNew = document.querySelector('#add-new');
+const contact = document.querySelector('#contact');
+const tableContainer = document.querySelector('.books-table-container');
+const booksForm = document.querySelector('.book-form');
+const contactInfo = document.querySelector('.contact-info');
 
-nth=(d) =>{
-  if (d > 3 && d < 21) return 'th';
-  switch (d % 10) {
-    case 1: return 'st';
-    case 2: return 'nd';
-    case 3: return 'rd';
-    default: return 'th';
-  }
-}
-formatAMPM = (date) => {
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
-  const seconds = date.getSeconds();
-  const ampm = hours >= 12 ? 'pm' : 'am';
-  hours %= 12;
-  hours = hours || 12;
-  minutes = minutes.toString().padStart(2, '0');
-  const strTime = `${hours}:${minutes}:${seconds} ${ampm}`;
-  return strTime;
-}
+// Book Class: represents a book object
 
-class BookClass {
-  constructor() {
-    this.AllBooks = (localStorage.storagebook != null) ? JSON.parse(localStorage.storagebook) : [];
+// Store Class: Handles Storage
+
+// Creating new Store instance
+const store = new Store();
+
+// UI Class : Handles UI tasks
+class UI {
+  // Static so I don't have to instantiate
+
+  static displayBooks() {
+    const books = store.getBooks();
+    books.forEach((book) => UI.addBookList(book));
+    list.classList.add('active');
   }
 
-  addbook=() => {
-    const title = document.getElementById('title');
-    const author = document.getElementById('author');
-    this.AllBooks.push({ title: title.value, author: author.value });
-    this.updateLocalStorage();
+  static addBookList(book) {
+    const bookList = document.getElementById('book-list');
+
+    const content = document.createElement('div');
+    content.innerHTML = `
+    <div>"${book.title}" By ${book.author}</div>
+    <button id="book-num-${book.id}"class="delete">Remove</button>
+    `;
+    bookList.appendChild(content);
+    content.classList.add('book-row-content');
   }
 
-  destroybook= (id) => {
-    this.AllBooks.splice(id, 1);
-    this.updateLocalStorage();
+  static deleteBook(element) {
+    if (element.classList.contains('delete')) {
+      element.parentElement.remove();
+    }
   }
 
-  showbooks = () => {
-    const ulist = document.createElement('ul');
-    ulist.className = 'booksList';
-    bo.innerHTML = '';
-    bo.appendChild(ulist);
-    let id = 0;
-    this.AllBooks.forEach((book) => {
-      ulist.innerHTML
-      += `<li class="booksLine ${id % 2 === 0 ? 'grey' : ''}">
-      <span>"${book.title}" by ${book.author}</span>
-      <button type="button" class="btn-remove" onClick="storagebook.destroybook(${id})">Remove</button>
-      </li>`;
-      id += 1;
-    });
-    listb.classList.add('active');
-    const d = new Date();
-    const date = d.getDate();
-    const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][d.getMonth()];
-    const year = d.getFullYear();
-    timecontainer.innerHTML = `${month} ${date}${nth(date)} ${year}, ${formatAMPM(d)}`;
-  }
-
-  updateLocalStorage= () => {
-    localStorage.storagebook = JSON.stringify(this.AllBooks);
-    this.showbooks();
+  static clearFields() {
+    document.querySelector('#title').value = '';
+    document.querySelector('#author').value = '';
   }
 }
 
-const storagebook = new BookClass();
+// Event listener for UI
+document.addEventListener('DOMContentLoaded', UI.displayBooks);
 
-storagebook.showbooks();
+// Event listener for submit
+document.querySelector('#book-form').addEventListener('submit', (e) => {
+  e.preventDefault();
 
-listopen= () => {
-  closebook.classList.remove('hidden');
-  closeaddbook.classList.add('hidden');
-  closecontact.classList.add('hidden');
-  listb.classList.add('active');
-  addnewb.classList.remove('active');
-  contactb.classList.remove('active');
-}
+  const title = document.querySelector('#title').value;
+  const author = document.querySelector('#author').value;
+  const id = store.count;
 
-addnewopen=() =>{
-  closebook.classList.add('hidden');
-  closeaddbook.classList.remove('hidden');
-  closecontact.classList.add('hidden');
-  listb.classList.remove('active');
-  addnewb.classList.add('active');
-  contactb.classList.remove('active');
-}
+  // New book instance when you submit
+  const book = new Book(title, author, id);
 
-contactopen= () => {
-  closebook.classList.add('hidden');
-  closeaddbook.classList.add('hidden');
-  closecontact.classList.remove('hidden');
-  listb.classList.remove('active');
-  addnewb.classList.remove('active');
-  contactb.classList.add('active');
-}
+  // Sending book object submision to UI and storage
+  UI.addBookList(book);
 
-listb.addEventListener('click', listopen);
-addnewb.addEventListener('click', addnewopen);
-contactb.addEventListener('click', contactopen);
+  store.addBook(book);
+
+  UI.clearFields();
+});
+
+// Event listener for removing a book
+document.querySelector('#book-list').addEventListener('click', (e) => {
+  UI.deleteBook(e.target);
+  const btnID = e.target.id;
+  const arrValues = btnID.split('-');
+  const idString = arrValues[arrValues.length - 1];
+  const id = parseInt(idString, 10);
+  // Remove book from store depending on id
+  store.removeBook(id);
+});
+
+// Get Date Luxon
+document.getElementById('date').innerHTML = DateTime.now().toLocaleString(DateTime.DATETIME_MED);
+
+// Single Page Hiding event listeners
+list.addEventListener('click', () => {
+  tableContainer.classList.remove('hide');
+  booksForm.classList.add('hide');
+  contactInfo.classList.add('hide');
+  list.classList.add('active');
+  addNew.classList.remove('active');
+  contact.classList.remove('active');
+});
+addNew.addEventListener('click', () => {
+  booksForm.classList.remove('hide');
+  contactInfo.classList.add('hide');
+  tableContainer.classList.add('hide');
+  addNew.classList.add('active');
+  list.classList.remove('active');
+  contact.classList.remove('active');
+});
+contact.addEventListener('click', () => {
+  contactInfo.classList.remove('hide');
+  booksForm.classList.add('hide');
+  tableContainer.classList.add('hide');
+  contact.classList.add('active');
+  addNew.classList.remove('active');
+  list.classList.remove('active');
+});

@@ -4,102 +4,97 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Awesome books</title>
-
-    <link rel="stylesheet" href="assets/css/index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/index.css" />
+    <title>Awesome Books</title>
   </head>
   <body>
-    <header>
-      <div class="header">
-          <div class="logo">
-            <span>Awesome Books</span>
-          </div>
-
-          <ul class="links">
-             <li id="list-b" class="link">List</li>
-             <li id="addnew-b" class="link">Add new</li>
-             <li id="Contact-b" >Contact</li>
+    <div class="nav-bar-container">
+      <div class="nav-bar">
+        <div class="main-logo">
+          <a href="#"><h3>Awesome Books</h3></a>
+        </div>
+        <nav class="menus">
+          <ul>
+            <li>
+              <a href="#" id="list">List </a>
+            </li>
+            <li>
+              <span class="vertical-line"></span>
+            </li>
+            <li>
+              <a href="#" id="add-new">Add new </a>
+            </li>
+            <li>
+              <span class="vertical-line"></span>
+            </li>
+            <li>
+              <a href="#" id="contact">Contact</a>
+            </li>
           </ul>
-      </div>
-      <time id="time-update"></time>
-    </header>
-
-    <section>
-      
-    <div id="showbookclose" class="showbook">
-      <h1>All awesome books</h1>
-      <div class="booklist">
-        <div class="AllB"></div>
+        </nav>
       </div>
     </div>
 
-    <div id="addbooksclose" class="addbokss hidden">
-      <h2>Add a new books</h2>
-      <form action="#" id="form" class="formadd">
+    <div class="date-container">
+      <p id="date"></p>
+    </div>
+
+    <div class="books-table-container hide">
+      <h1 class="main-title">All awesome books</h1>
+      <div class="book-list" id="book-list">
+        <div class="books-table"></div>
+      </div>
+    </div>
+
+    <form class="book-form hide" id="book-form">
+      <h1 class="add-book-title">Add a new book</h1>
+      <div>
         <input
-          class="input-white"
+          class="title-input"
           type="text"
-          name="Title"
           id="title"
-          placeholder="title"
+          placeholder="Title"
+          required
         />
-
+      </div>
+      <div>
         <input
-          class="input-white"
+          class="author-input"
           type="text"
-          name="Author"
           id="author"
-          placeholder="author"
+          placeholder="Author"
+          required
         />
+      </div>
 
-        <input
-          type="submit"
-          name="submit"
-          id="submit"
-          value="Add"
-          class="btn-white"
-          onclick="storagebook.addbook()"
-        />
-      </form>
+      <button class="add-book-button" type="submit">Add</button>
+    </form>
+
+    <div class="contact-info hide">
+      <h1 class="info-title">Contact information</h1>
+      <p class="info-description1">
+        Do you have any questions or you just want to say "Hello"?
+      </p>
+      <p class="info-description2">You can reach out to us!</p>
+      <ul class="contact-list">
+        <li>Our email: mail@mail.com</li>
+        <li>Our phone number: 0043586534422</li>
+        <li>Our address: Steetname 22, 84503 City, Country</li>
+      </ul>
     </div>
-
-    <div id="contactclose" class="contact hidden">
-      <div class="Contact-header">
-        <h2>Contact Information</h2>
-      </div>
-
-      <div class="contact-info">
-        <p>
-          Do have any questions or you just or you want to say "Hello"? You can
-          reach out to us!
-        </p>
-      </div>
-
-      <div class="adress">
-        <ul>
-          <li>Our e-mail: Hevarkas@gmail.com</li>
-
-          <li>Our phone number: +964 770 469 9094</li>
-
-          <li>Our address: Erbil, Iraq</li>
-        </ul>
-        <ul>
-          <li>Our e-mail: Camarad21@gmail.com</li>
-
-          <li>Our phone number: +212 654 737905</li>
-
-          <li>Our address: Laayoune, Morocco</li>
-        </ul>
-      </div>
-    </div>
-    </section>
-
-    <footer>
+    <div class="footer-container">
       <div class="footer">
-        <p>Copyright -</p>
+        <div class="copyright">
+          Copyright @ 2022 Creative Commons. Some Rights Reserved.
+        </div>
       </div>
-    </footer>
-
-    <script src="assets/js/index.js"></script>
+    </div>
+    <script type="module" src="./assets/js/index.js"></script>
   </body>
 </html>
